@@ -1,19 +1,23 @@
 {
-  "name": "janebot-cli",
+  "name": "downrigger",
   "version": "2.0.0",
-  "description": "Bootstrap a complete AI agent context environment with PKM, QMD, and automation",
-  "main": "bin/janebot-cli.js",
+  "description": "Trading Agent Context Environment Bootstrap Tool - Fork of janebot-cli for automated trading",
+  "main": "bin/downrigger.js",
   "bin": {
-    "janebot-cli": "./bin/janebot-cli.js",
-    "janebot": "./bin/janebot-cli.js"
+    "downrigger": "./bin/downrigger.js",
+    "trawler": "./bin/downrigger.js"
   },
   "scripts": {
     "test": "jest",
     "lint": "eslint lib/ bin/",
-    "dev": "nodemon bin/janebot-cli.js"
+    "dev": "nodemon bin/downrigger.js"
   },
   "keywords": [
     "ai-agent",
+    "trading",
+    "solana",
+    "defi",
+    "claw-trader",
     "pkm",
     "para",
     "qmd",

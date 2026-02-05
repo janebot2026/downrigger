@@ -16,7 +16,7 @@ const { initCommand } = require('../lib/commands/init');
 
 describe('init command', () => {
   test('respects --skip-heartbeat (does not create HEARTBEAT.md)', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-init-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-init-'));
     const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
     try {

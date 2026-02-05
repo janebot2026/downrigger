@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 
 describe('verify --fix UX', () => {
   test('core file issues are not marked fixable without an implementation', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-verify-core-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-verify-core-'));
 
     try {
       const { _test } = require('../lib/commands/verify');
@@ -21,7 +21,7 @@ describe('verify --fix UX', () => {
   });
 
   test('script issues are not marked fixable without an implementation', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-verify-scripts-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-verify-scripts-'));
 
     try {
       const { _test } = require('../lib/commands/verify');

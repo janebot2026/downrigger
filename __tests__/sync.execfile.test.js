@@ -11,7 +11,7 @@ const { syncCommand } = require('../lib/commands/sync');
 
 describe('sync command', () => {
   test('uses execFileSync with script paths (safe for spaces)', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot cli sync -'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger sync -'));
     const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
     try {

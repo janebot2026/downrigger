@@ -6,8 +6,8 @@ const { setupOpenClawCron } = require('../lib/utils/openclaw-cron');
 
 describe('openclaw-cron malformed jobs.json safety', () => {
   test('does not overwrite malformed ~/.openclaw/cron/jobs.json when force=false', async () => {
-    const tmpHome = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-home-'));
-    const tmpTarget = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-target-'));
+    const tmpHome = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-home-'));
+    const tmpTarget = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-target-'));
 
     const prevHome = process.env.HOME;
     process.env.HOME = tmpHome;

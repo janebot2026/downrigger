@@ -41,7 +41,7 @@ Legend: [ ] pending, [x] done
     - Ensure verify/doctor don’t build paths from empty HOME.
   - Test plan:
     - `npm test`
-    - Manual: run `janebot-cli install cron` with HOME unset (expect clear error)
+    - Manual: run `downrigger install cron` with HOME unset (expect clear error)
   - Completion note: Added HOME checks in verify/doctor cron checks and tests covering missing HOME.
 
 - [x] F-005 Resolve install target dir to absolute path
@@ -70,7 +70,7 @@ Legend: [ ] pending, [x] done
     - Keep directory checks fixable.
   - Test plan:
     - `npm test`
-    - Manual: `janebot-cli verify --fix` on partial workspace
+    - Manual: `downrigger verify --fix` on partial workspace
   - Completion note: Core files/scripts issues now provide remediation commands and are not marked fixable; added unit tests.
 
 - [x] F-008 Remove unused dependency `inquirer`
@@ -127,7 +127,7 @@ Legend: [ ] pending, [x] done
     - Keep existing CLI output stable.
   - Test plan:
     - `npm test`
-    - Manual: `janebot-cli doctor` and `janebot-cli verify` on a sample workspace
+    - Manual: `downrigger doctor` and `downrigger verify` on a sample workspace
   - Completion note: Extracted shared HOME/cron path resolution into `lib/utils/checks.js`; updated doctor/verify and added tests.
 
 - [x] F-014 Use `agentName` in cron job generation (or remove misleading param)

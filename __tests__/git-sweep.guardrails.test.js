@@ -6,7 +6,7 @@ const { setupScripts } = require('../lib/utils/scripts');
 
 describe('git_workspace_sweep.sh generation', () => {
   test('includes guardrails for autocommit and quotes repo paths', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-scripts-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-scripts-'));
 
     try {
       await setupScripts(tmpDir, { force: true, agentName: 'Jane' });

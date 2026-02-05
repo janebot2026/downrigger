@@ -6,7 +6,7 @@ const { writeQmdWrapper } = require('../lib/utils/qmd');
 
 describe('qmd wrapper (integration)', () => {
   test('writeQmdWrapper creates an executable scripts/qmd.sh referencing vendored QMD', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-qmd-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-qmd-'));
 
     try {
       const wrapperPath = await writeQmdWrapper(tmpDir, { force: true });

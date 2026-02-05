@@ -6,7 +6,7 @@ const { setupScripts } = require('../lib/utils/scripts');
 
 describe('weekly-synthesis.sh generation', () => {
   test('uses a single Node invocation (no per-entity loop spawning node)', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-scripts-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-scripts-'));
 
     try {
       await setupScripts(tmpDir, { force: true, agentName: 'Jane' });

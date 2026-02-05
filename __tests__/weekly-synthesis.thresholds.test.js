@@ -6,7 +6,7 @@ const { setupScripts } = require('../lib/utils/scripts');
 
 describe('weekly-synthesis.sh tiering logic', () => {
   test('uses >= thresholds and avoids repeated getTier calls', async () => {
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-scripts-'));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-scripts-'));
 
     try {
       await setupScripts(tmpDir, { force: true, agentName: 'Jane' });

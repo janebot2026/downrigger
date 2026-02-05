@@ -1,4 +1,4 @@
-# 🦞 janebot-cli
+# 🦞 downrigger
 
 Bootstrap a complete AI agent context environment with PKM (Personal Knowledge Management), QMD search, and OpenClaw-native automation.
 
@@ -13,7 +13,7 @@ Bootstrap a complete AI agent context environment with PKM (Personal Knowledge M
 
 ## What It Does
 
-`janebot-cli` sets up a full context environment for persistent AI agents:
+`downrigger` sets up a full context environment for persistent AI agents:
 
 - **PARA Structure** — Projects, Areas, Resources, Archives organization
 - **QMD Search** — Fast full-text + semantic search over your knowledge base
@@ -28,8 +28,8 @@ Bootstrap a complete AI agent context environment with PKM (Personal Knowledge M
 
 ```bash
 # Clone or download
-git clone https://github.com/janebot2026/janebot-cli.git
-cd janebot-cli
+git clone https://github.com/janebot2026/downrigger.git
+cd downrigger
 
 # Install dependencies
 npm install
@@ -42,10 +42,10 @@ npm link
 
 ```bash
 # Full setup in one command
-janebot-cli init
+downrigger init
 
 # Or with options
-janebot-cli init -d ~/my-agent --yes
+downrigger init -d ~/my-agent --yes
 ```
 
 This creates (in your OpenClaw workspace):
@@ -80,7 +80,7 @@ This creates (in your OpenClaw workspace):
 ### `init` — Full Bootstrap
 
 ```bash
-janebot-cli init [options]
+downrigger init [options]
 
 Options:
   -d, --dir <path>    Target directory (default: ~/.openclaw/workspace or ~/.openclaw/workspace-<profile>)
@@ -98,65 +98,65 @@ Options:
 
 ```bash
 # Install everything (for fresh DigitalOcean droplets)
-janebot-cli install all -d ~/workspace
+downrigger install all -d ~/workspace
 
 # Install just the PKM structure
-janebot-cli install pkm
+downrigger install pkm
 
 # Install just QMD
-janebot-cli install qmd
+downrigger install qmd
 
 # Install just scripts
-janebot-cli install scripts
+downrigger install scripts
 
 # Install development tools (Node, Rust, Python)
-janebot-cli install devtools
+downrigger install devtools
 
  # Install just cron jobs
- janebot-cli install cron
+ downrigger install cron
 
  # Install heartbeat support
- janebot-cli install heartbeat
+ downrigger install heartbeat
  ```
 
 ### `verify` — Health Check
 
 ```bash
 # Check environment integrity
-janebot-cli verify
+downrigger verify
 
 # Auto-fix issues
-janebot-cli verify --fix
+downrigger verify --fix
 ```
 
 ### `doctor` — Diagnostics
 
 ```bash
 # Full health report
-janebot-cli doctor
+downrigger doctor
 ```
 
 ### `sync` — Manual Sync
 
 ```bash
 # Update QMD indexes, run synthesis, git sync
-janebot-cli sync
+downrigger sync
 ```
 
 ### `template` — Generate Files
 
 ```bash
 # List available templates
-janebot-cli template --list
+downrigger template --list
 
 # Generate a file
-janebot-cli template MEMORY.md -o MEMORY.md
-janebot-cli template SOUL.md -o SOUL.md
+downrigger template MEMORY.md -o MEMORY.md
+downrigger template SOUL.md -o SOUL.md
 ```
 
 ## OpenClaw Cron System
 
-Unlike traditional cron, janebot-cli uses OpenClaw's native cron system (`~/.openclaw/cron/jobs.json`).
+Unlike traditional cron, downrigger uses OpenClaw's native cron system (`~/.openclaw/cron/jobs.json`).
 
 Note: OpenClaw docs recommend using `openclaw cron add/edit` for changes. Manual edits to `~/.openclaw/cron/jobs.json` are only safe when the Gateway is stopped.
 
@@ -267,11 +267,11 @@ Usage:
 
 Notes:
 - QMD is vendored into your workspace at `./.tools/qmd`.
-- `bun` must be installed before running `janebot-cli install qmd`.
+- `bun` must be installed before running `downrigger install qmd`.
 
 ## Migration from v1.x
 
-If you have an existing janebot-cli v1.x setup:
+If you have an existing downrigger v1.x setup:
 
 1. **Backup your current setup**
    ```bash
@@ -280,15 +280,15 @@ If you have an existing janebot-cli v1.x setup:
 
 2. **Update the CLI**
    ```bash
-   cd /path/to/janebot-cli
+   cd /path/to/downrigger
    git pull
    npm install
    ```
 
 3. **Update scripts only (preserves your memory files)**
    ```bash
-   janebot-cli install scripts --force
-   janebot-cli install cron --force
+   downrigger install scripts --force
+   downrigger install cron --force
    ```
 
 4. **Fix time-sync bloat**

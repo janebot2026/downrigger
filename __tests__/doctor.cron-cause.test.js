@@ -10,7 +10,7 @@ jest.mock('child_process', () => ({
 
 describe('doctor cron diagnostics', () => {
   test('includes cause when openclaw cron list fails and jobs.json exists', async () => {
-    const tmpHome = await fs.mkdtemp(path.join(os.tmpdir(), 'janebot-cli-home-'));
+    const tmpHome = await fs.mkdtemp(path.join(os.tmpdir(), 'downrigger-home-'));
     const prevHome = process.env.HOME;
     process.env.HOME = tmpHome;
 

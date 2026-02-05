@@ -40,4 +40,4 @@
 ## Follow-up Recommendations (Optional)
 
 1) Consider untracking `node_modules/` from git (it appears to be tracked in this repo, which makes dependency maintenance noisy).
-2) Add a small end-to-end smoke test that runs `bin/janebot-cli.js init --dry-run` and asserts expected output.
+2) Add a small end-to-end smoke test that runs `bin/downrigger.js init --dry-run` and asserts expected output.

@@ -24,6 +24,7 @@ const { verifyCommand } = require('../lib/commands/verify');
 const { doctorCommand } = require('../lib/commands/doctor');
 const { resetCommand } = require('../lib/commands/reset');
 const { templateCommand } = require('../lib/commands/template');
+const { exportDebugCommand } = require('../lib/commands/export-debug');
 const tradeCommand = require('../lib/commands/trade');
 
 function getDefaultWorkspaceDir() {
@@ -91,6 +92,15 @@ program
   .action(resetCommand);
 
 program
+  .command('export-debug')
+  .description('Export debug bundle for support (logs, configs, incidents, snapshots)')
+  .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
+  .option('--last <hours>', 'Hours of history to include', '24')
+  .option('-o, --output <file>', 'Output tarball path')
+  .option('--agent-name <name>', 'Agent name', 'Jane')
+  .action(exportDebugCommand);
+
+program
   .command('template <name>')
   .description('Generate a file from built-in templates')
   .option('-o, --output <path>', 'Output file path')
@@ -126,6 +136,7 @@ program.on('--help', () => {
   console.log('  $ downrigger install trader                    # Full trading environment');
   console.log('  $ downrigger doctor                            # Run health checks');
   console.log('  $ downrigger reset --keep-wallet --force       # Reset but keep wallet');
+  console.log('  $ downrigger export-debug --last 24h           # Export debug bundle');
   console.log('  $ downrigger template RISK_RULES.md -o core/   # Generate template');
   console.log('');
   console.log('Available components for install:');

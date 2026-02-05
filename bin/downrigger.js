@@ -26,6 +26,8 @@ const { resetCommand } = require('../lib/commands/reset');
 const { templateCommand } = require('../lib/commands/template');
 const { exportDebugCommand } = require('../lib/commands/export-debug');
 const { voiceCommand } = require('../lib/commands/voice');
+
+const { preferencesCommand } = require('../lib/commands/preferences');
 const tradeCommand = require('../lib/commands/trade');
 
 function getDefaultWorkspaceDir() {
@@ -98,6 +100,14 @@ program
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
   .option('--voice <name>', 'Voice name (for set)')
   .action(voiceCommand);
+
+\nprogram
+  .command('preferences [action]')
+  .description('Manage conversation-derived preferences (requires confirmation)')
+  .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
+  .option('--id <id>', 'Candidate ID')
+  .option('--reason <text>', 'Rejection reason')
+  .action(preferencesCommand);
 
 program
   .command('export-debug')

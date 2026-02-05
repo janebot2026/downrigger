@@ -209,6 +209,41 @@ downrigger preferences reject <id>    # Discard
 
 Prevents LLM drift.
 
+## Architecture & Dependencies
+
+**Important:** This is designed for the Trawling Traders ecosystem.
+
+| Component | Stands Alone? | Role |
+|-----------|--------------|------|
+| `downrigger` CLI | ✅ Yes | Bootstrapper — creates workspace, configs, templates |
+| `claw-trader-cli` | ✅ Yes | **The hands** — quotes, swaps, shield checks, holdings |
+| `bot-runner` | ❌ **No** | **The brain** — requires Trawling Traders control plane |
+
+**bot-runner depends on:**
+- Trawling Traders control plane (`api.trawlingtraders.com`)
+- Polls `/v1/bot/{id}/intents` for trade decisions
+- Reports results back to centralized backend
+- Long-polling architecture requires the backend to work
+
+### If You Want Standalone
+
+If you remove the trading-specific components, you get a **normal OpenClaw instance**:
+
+**Remove:**
+- `TRADING_CONFIG.md`, `RISK_RULES.md`, `STRATEGIES.md` → Standard agent tasks
+- `journal/trades/`, `state/portfolio.json` → Regular memory files
+- `episodes/` → Normal project tracking
+- Trading-specific cron jobs → Standard heartbeat/improvement jobs
+- `bot-runner` service → Use standard OpenClaw agent sessions
+
+**Keep:**
+- `core/MEMORY.md`, `SOUL.md`, `USER.md`, `AGENTS.md`
+- `journal/` as daily notes
+- `knowledge/` structure
+- Voice and preference systems work standalone
+
+**Bottom line:** The organization and explainability systems are reusable. The trade execution requires Trawling Traders backend.
+
 ## Philosophy
 
 - **Explainability over black box** — Every decision has a paper trail

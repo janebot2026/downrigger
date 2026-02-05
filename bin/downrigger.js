@@ -25,6 +25,7 @@ const { doctorCommand } = require('../lib/commands/doctor');
 const { resetCommand } = require('../lib/commands/reset');
 const { templateCommand } = require('../lib/commands/template');
 const { exportDebugCommand } = require('../lib/commands/export-debug');
+const { voiceCommand } = require('../lib/commands/voice');
 const tradeCommand = require('../lib/commands/trade');
 
 function getDefaultWorkspaceDir() {
@@ -92,6 +93,13 @@ program
   .action(resetCommand);
 
 program
+  .command('voice [action]')
+  .description('Manage voice personality (cosmetic only)')
+  .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
+  .option('--voice <name>', 'Voice name (for set)')
+  .action(voiceCommand);
+
+program
   .command('export-debug')
   .description('Export debug bundle for support (logs, configs, incidents, snapshots)')
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
@@ -137,6 +145,8 @@ program.on('--help', () => {
   console.log('  $ downrigger doctor                            # Run health checks');
   console.log('  $ downrigger reset --keep-wallet --force       # Reset but keep wallet');
   console.log('  $ downrigger export-debug --last 24h           # Export debug bundle');
+  console.log('  $ downrigger voice list                        # List voice options');
+  console.log('  $ downrigger voice set direct                  # Set voice to direct');
   console.log('  $ downrigger template RISK_RULES.md -o core/   # Generate template');
   console.log('');
   console.log('Available components for install:');

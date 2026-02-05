@@ -4,7 +4,6 @@
  * 
  * Sets up a full trading environment for AI agents:
  * - PARA directory structure
- * - QMD search layer
  * - Trading tools integration (claw-trader-cli)
  * - Cron jobs and automation
  * - Heartbeat monitoring
@@ -23,6 +22,7 @@ const { initCommand } = require('../lib/commands/init');
 const { installCommand } = require('../lib/commands/install');
 const { verifyCommand } = require('../lib/commands/verify');
 const { doctorCommand } = require('../lib/commands/doctor');
+const { resetCommand } = require('../lib/commands/reset');
 const { templateCommand } = require('../lib/commands/template');
 const tradeCommand = require('../lib/commands/trade');
 
@@ -38,12 +38,12 @@ function getDefaultWorkspaceDir() {
 
 program
   .name('downrigger')
-  .description('Bootstrap a trading agent context environment')
+  .description('Trading Agent Context Environment Bootstrap Tool')
   .version(pkg.version);
 
 program
   .command('init')
-  .description('Full initialization of trading context environment')
+  .description('Full initialization of trading context environment (deprecated: use install trader)')
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
   .option('--skip-qmd', 'Skip QMD installation')
   .option('--skip-cron', 'Skip cron job setup')
@@ -54,14 +54,18 @@ program
   .option('--force', 'Overwrite existing files')
   .option('--agent-name <name>', 'Agent name', 'Jane')
   .option('--owner-name <name>', 'Owner/stakeholder name', 'Owner')
-  .action(initCommand);
+  .action((options) => {
+    console.log(chalk.yellow('⚠️  init is deprecated. Use: downrigger install trader'));
+    return initCommand(options);
+  });
 
 program
   .command('install <component>')
-  .description('Install specific component (pkm, qmd, scripts, cron, heartbeat, trading)')
+  .description('Install specific component')
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
   .option('--force', 'Overwrite existing files')
   .option('--agent-name <name>', 'Agent name', 'Jane')
+  .option('--owner-name <name>', 'Owner/stakeholder name', 'Owner')
   .action(installCommand);
 
 program
@@ -73,9 +77,18 @@ program
 
 program
   .command('doctor')
-  .description('Diagnose and report on environment health')
+  .description('Run health checks and print green lights report')
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
   .action(doctorCommand);
+
+program
+  .command('reset')
+  .description('Reset trading environment (clear state, journal, suggestions)')
+  .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
+  .option('--keep-wallet', 'Preserve wallet file during reset')
+  .option('--no-restart', 'Do not prompt to restart service after reset')
+  .option('--force', 'Confirm reset (required)')
+  .action(resetCommand);
 
 program
   .command('template <name>')
@@ -86,7 +99,7 @@ program
 
 program
   .command('sync')
-  .description('Sync QMD indexes and run weekly synthesis')
+  .description('Sync and run weekly synthesis')
   .option('-d, --dir <path>', 'Target directory', getDefaultWorkspaceDir())
   .action(async (options) => {
     const { syncCommand } = require('../lib/commands/sync');
@@ -105,5 +118,24 @@ program
   .action(async (options) => {
     await tradeCommand.parseAsync(['node', 'trade', ...process.argv.slice(process.argv.indexOf('trade') + 1)]);
   });
+
+// Help text
+program.on('--help', () => {
+  console.log('');
+  console.log('Examples:');
+  console.log('  $ downrigger install trader                    # Full trading environment');
+  console.log('  $ downrigger doctor                            # Run health checks');
+  console.log('  $ downrigger reset --keep-wallet --force       # Reset but keep wallet');
+  console.log('  $ downrigger template RISK_RULES.md -o core/   # Generate template');
+  console.log('');
+  console.log('Available components for install:');
+  console.log('  trader    - Full trading environment (6 steps + green lights report)');
+  console.log('  all       - General workspace (devtools + pkm + scripts + heartbeat)');
+  console.log('  pkm       - PKM directory structure');
+  console.log('  scripts   - Automation scripts');
+  console.log('  cron      - OpenClaw cron jobs');
+  console.log('  heartbeat - Heartbeat monitoring');
+  console.log('');
+});
 
 program.parse();
